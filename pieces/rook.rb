@@ -2,6 +2,9 @@ require_relative "piece"
 
 
 class Rook < Piece
+    @@move_pattern = [[1,0],[-1,0],[0,1],[0,-1]]
+    @@move_upto = 8
+
     attr_reader :icon 
     attr_accessor :pos 
 

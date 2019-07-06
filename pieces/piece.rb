@@ -1,4 +1,4 @@
 class Piece
-    def initialize
+    def move
     end
 end

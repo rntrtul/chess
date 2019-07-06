@@ -20,4 +20,11 @@ class Board
         end
         puts "     a   b   c   d   e   f   g   h"
     end
+
+    def get_piece pos 
+        col = (pos[0].ord - 97)%26
+        row = pos[1].to_i - 1   
+        
+        return @board[row][col]
+    end
 end

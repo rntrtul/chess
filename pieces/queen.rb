@@ -1,6 +1,9 @@
 require_relative "piece"
 
 class Queen < Piece 
+    @@move_pattern = [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1]]
+    @@move_upto = 8
+
     attr_reader :icon 
     attr_accessor :pos 
 

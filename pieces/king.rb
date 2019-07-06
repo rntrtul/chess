@@ -1,7 +1,7 @@
 require_relative "piece"
-
-
 class King < Piece 
+    @@move_pattern = [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1]]
+    @@move_upto = 1
     attr_reader :icon 
     attr_accessor :pos 
 
