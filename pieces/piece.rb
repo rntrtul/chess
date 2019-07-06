@@ -1,4 +1,4 @@
 class Piece
-    def move_valid
+    def initialize
     end
 end
