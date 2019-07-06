@@ -1,6 +1,3 @@
-require_relative "piece"
-
-
 class Rook < Piece
     attr_reader :icon 
     attr_accessor :pos 

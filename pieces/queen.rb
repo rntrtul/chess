@@ -1,6 +1,4 @@
-require_relative "piece"
-
-class Queen < Piece 
+class Queen
     attr_reader :icon 
     attr_accessor :pos 
 

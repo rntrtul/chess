@@ -1,5 +1,3 @@
-require_relative "piece"
-
 class Bishop < Piece 
     attr_reader :icon 
     attr_accessor :pos 

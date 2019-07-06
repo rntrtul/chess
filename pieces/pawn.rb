@@ -1,6 +1,4 @@
-require_relative "piece"
-
-class Pawn < Piece 
+class Pawn 
     attr_reader :icon 
     attr_accessor :pos 
 

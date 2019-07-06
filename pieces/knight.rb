@@ -1,6 +1,4 @@
-require_relative "piece"
-
-class Knight < Piece
+class Knight 
     attr_reader :icon 
     attr_accessor :pos 
 
