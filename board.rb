@@ -28,16 +28,35 @@ class Board
         return [row, col]
     end
 
+    def cord_on_board? cord 
+        if(cord[0]>= 0 && cord[0]<=7 && cord[1]>= 0 && cord[1]<=7 )
+            return true
+        else
+            return false
+        end
+    end
+
     def get_piece pos 
-        cord = pos_to_cord pos  
+        cord = pos_to_cord pos 
+
+        if (cord_on_board?cord )
+            cell = @board[cord[0]][cord[1]]
         
-        return @board[cord[0]][cord[1]]
+            return cell if cell != 0
+        else
+            return 0
+        end
     end
 
     def move_piece pos , piece
         cord = pos_to_cord pos
-        @board[piece.pos[0]][piece.pos[1]] = 0
-        @board[cord[0]][cord[1]] = piece
-        piece.pos = cord
+        if (piece.move_valid? cord)            
+            @board[piece.pos[0]][piece.pos[1]] = 0
+            @board[cord[0]][cord[1]] = piece
+            piece.pos = cord
+            return true
+        else
+            return false
+        end
     end
 end

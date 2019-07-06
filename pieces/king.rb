@@ -1,7 +1,5 @@
 require_relative "piece"
 class King < Piece 
-    @@move_pattern = [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1]]
-    @@move_upto = 1
     attr_reader :icon 
     attr_accessor :pos 
 
@@ -9,6 +7,18 @@ class King < Piece
         @pos = pos 
         color_char = color == "white" ? "\u2654": "\u265A"
         @icon = color_char.encode('utf-8')
+    end
+
+    def move_valid? cord
+        row_moved = cord[0]-pos[0].abs
+        col_moved = cord[1]-pos[1].abs
+        puts row_moved.to_s + " " + col_moved.to_s      
+
+        if (row_moved <= 1 && col_moved <=1)
+            return true
+        else
+            return false
+        end
     end
 
     def check?

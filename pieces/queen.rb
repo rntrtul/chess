@@ -1,9 +1,6 @@
 require_relative "piece"
 
 class Queen < Piece 
-    @@move_pattern = [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1]]
-    @@move_upto = 8
-
     attr_reader :icon 
     attr_accessor :pos 
 
@@ -11,5 +8,17 @@ class Queen < Piece
         @pos = pos 
         color_char = color == "white" ? "\u2655": "\u265B"
         @icon = color_char.encode('utf-8')
+    end
+
+    def move_valid? cord
+        row_moved = (cord[0]-pos[0]).abs
+        col_moved = (cord[1]-pos[1]).abs
+        puts row_moved.to_s + " " + col_moved.to_s        
+
+        if (row_moved <= 8 && col_moved == 0 || row_moved == 0  && col_moved <= 8 || row_moved == col_moved)
+            return true
+        else
+            return false
+        end
     end
 end

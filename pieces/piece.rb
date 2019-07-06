@@ -1,4 +1,5 @@
 class Piece
-    def move
+    def valid_move? board
+        @pos 
     end
 end
