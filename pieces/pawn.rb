@@ -2,11 +2,11 @@ class Pawn
     attr_reader :icon 
     attr_accessor :pos 
 
-    def initialize pos, color
+    def initialize pos, color, moved = false
         @pos = pos 
         color_char = color == "white" ? "\u2659": "\u265F"
         @icon = color_char.encode('utf-8')
-        @moved = false
+        @moved = moved
     end
 
     def move_valid? cord
