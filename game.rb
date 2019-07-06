@@ -10,4 +10,5 @@ white_player = Player.new "white"
 white_player.set_pieces(board.board)
 
 board.draw_board
-puts board.get_piece("d8").icon
+board.move_piece("d5",board.get_piece("d7"))
+board.draw_board
