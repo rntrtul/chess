@@ -1,4 +1,4 @@
-class Rook < Piece
+class Rook 
     attr_reader :icon 
     attr_accessor :pos 
 
@@ -11,7 +11,6 @@ class Rook < Piece
     def move_valid? cord
         row_moved = (cord[0]-pos[0]).abs
         col_moved = (cord[1]-pos[1]).abs
-        puts row_moved.to_s + " " + col_moved.to_s
 
         if (row_moved <= 8 && col_moved == 0 || row_moved == 0  && col_moved <= 8 )
             return true

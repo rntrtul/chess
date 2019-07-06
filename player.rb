@@ -3,16 +3,18 @@ Dir["./pieces/*.rb"].each {|file| require file }
 class Player
     def initialize color
         @color = color
+        @pieces = []
     end
 
     def set_pieces board
         row_pawn = @color == 'white'? 6 : 1
         row_king = @color == 'white'? 7 : 0
 
-        board[row_pawn].each_with_index do |cell,index|
-            board[row_pawn][index] = Pawn.new([row_pawn,index], @color)
+        board[row_pawn].each_with_index do |cell,col|
+            board[row_pawn][col] = Pawn.new([row_pawn,col], @color)
+            @pieces << board[row_pawn][col]
         end
-        
+
         board[row_king][0] = Rook.new([row_king,0], @color)
         board[row_king][1] = Knight.new([row_king,1], @color)
         board[row_king][2] = Bishop.new([row_king,2], @color)
@@ -21,5 +23,9 @@ class Player
         board[row_king][5] = Bishop.new([row_king,5], @color)
         board[row_king][6] = Knight.new([row_king,6], @color)
         board[row_king][7] = Rook.new([row_king,7], @color) 
+
+        board[row_king].each_with_index do |piece, col|
+            @pieces << board[row_king][col]
+        end
     end
 end

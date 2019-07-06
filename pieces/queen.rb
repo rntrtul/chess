@@ -11,7 +11,6 @@ class Queen
     def move_valid? cord
         row_moved = (cord[0]-pos[0]).abs
         col_moved = (cord[1]-pos[1]).abs
-        puts row_moved.to_s + " " + col_moved.to_s        
 
         if (row_moved <= 8 && col_moved == 0 || row_moved == 0  && col_moved <= 8 || row_moved == col_moved)
             return true
