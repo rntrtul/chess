@@ -1,11 +1,13 @@
 class Rook 
-    attr_reader :icon 
+    attr_reader :icon , :colour 
     attr_accessor :pos 
 
-    def initialize pos, color
+    def initialize pos, colour
         @pos = pos 
-        color_char = color == "white" ? "\u2656": "\u265C"
-        @icon = color_char.encode('utf-8')
+        @points = 5
+        @colour = colour
+        colour_char = colour == "white" ? "\u2656": "\u265C"
+        @icon = colour_char.encode('utf-8')
     end
 
     def move_valid? cord

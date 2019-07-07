@@ -1,5 +1,5 @@
 class Bishop
-    attr_reader :icon 
+    attr_reader :icon , :colour
     attr_accessor :pos 
 
     def initialize pos, color

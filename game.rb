@@ -21,7 +21,7 @@ while (piece_pos != "stop")
         puts"enter pos you want to go to"
         move_to = gets.chomp
 
-        board.move_piece(move_to, piece_got)
+        board.can_move?(move_to, piece_got)
         board.draw_board
     else
         puts "enter a valid square with a valid piece"

@@ -1,11 +1,13 @@
 class Queen
-    attr_reader :icon 
+    attr_reader :icon , :colour 
     attr_accessor :pos 
 
-    def initialize pos, color
+    def initialize pos, colour
         @pos = pos 
-        color_char = color == "white" ? "\u2655": "\u265B"
-        @icon = color_char.encode('utf-8')
+        @points = 9
+        @colour = colour
+        colour_char = colour == "white" ? "\u2655": "\u265B"
+        @icon = colour_char.encode('utf-8')
     end
 
     def move_valid? cord

@@ -13,7 +13,7 @@ class Board
                 if (cell != 0)
                     print "| #{cell.icon} "
                 else
-                    print "|   "
+                    print "|   " 
                 end
             end
             print "|\n   +---+---+---+---+---+---+---+---+\n"
@@ -47,23 +47,34 @@ class Board
         end
     end
 
-    def move_piece pos, piece
-        cord = pos_to_cord pos
-        if (piece.move_valid? cord) 
-            if(path_clear(cord,piece))
-                @board[piece.pos[0]][piece.pos[1]] = 0
-                @board[cord[0]][cord[1]] = piece
-                piece.pos = cord
-                return true
-            else
-                return false
-            end
+    def can_move? pos, piece
+        cord = pos_to_cord(pos)
+
+        if (piece.move_valid? cord)
+            move_piece(cord,piece) if(attacking?(cord,piece) || path_clear?(cord,piece))
+            return true
         else
             return false
         end
     end
 
-    def path_clear cord, piece
+    def move_piece cord, piece
+        @board[piece.pos[0]] [piece.pos[1]] = 0
+        @board[cord[0]][cord[1]] = piece
+        piece.pos = cord
+    end
+
+    def attacking? cord, piece 
+        cell = @board[cord[0]][cord[1]]
+
+        if (cell != 0)
+            return true if (cell.colour != piece.colour)
+        end
+
+        return false
+    end
+
+    def path_clear? cord, piece
         row_moved = (cord[0] - piece.pos[0]).abs
         col_moved = (cord[1] - piece.pos[1]).abs
         next_cord = [0,0]
@@ -72,10 +83,9 @@ class Board
         if (row_moved == col_moved) # bishop/queen movement
             for i in 1..row_moved do
                 next_cord = [piece.pos[0] + direction[0] * i, piece.pos[1] + direction[1] * i]
+
                 return false if @board[next_cord[0]][next_cord[1]] != 0
             end
-
-            return true
         elsif (row_moved <= 8 && col_moved == 0 || row_moved == 0  && col_moved <= 8 ) #rook/queen movement
             axis = row_moved == 0 ? col_moved : row_moved
 
@@ -85,18 +95,18 @@ class Board
                 else
                     next_cord = [piece.pos[0], piece.pos[1] + direction[1] * i]
                 end
+
                 return  false if @board[next_cord[0]][next_cord[1]] != 0
             end
-
-            return true
         else #knight/king/pawn movement
-            return true
         end
+
+        return true
     end
 
     def direction_move cord, piece
-        row_direction = cord[0] - piece.pos[0] >= 0? 1 : -1
-        col_direction = cord[1] - piece.pos[1] >= 0? 1 : -1
+        row_direction = cord[0] - piece.pos[0] >= 0 ? 1 : -1
+        col_direction = cord[1] - piece.pos[1] >= 0 ? 1 : -1
         
         return [row_direction, col_direction]
     end
