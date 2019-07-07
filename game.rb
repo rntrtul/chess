@@ -4,6 +4,8 @@ require "oj"
 
 class Game
     attr_reader :chess_board , :black, :white
+    
+    private
     def initialize
         @chess_board = Board.new
 
@@ -61,11 +63,11 @@ class Game
         puts "Game saved"
       end
       
-      def load 
+    def load 
         puts "Game saves:"
         saved_games = Dir.entries("saved_games").reject{|entry| entry == "." || entry == ".."}
         puts saved_games
-    
+
         puts "Enter the save you wish to load (0 if you want a new game)"
         save_name = gets.chomp
         if (save_name != "0")
@@ -81,7 +83,7 @@ class Game
         end
 
         game_loop
-      end
+    end
 end
 
 game= Game.new
