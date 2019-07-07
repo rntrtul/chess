@@ -4,13 +4,14 @@ class Pawn
 
     def initialize pos, color, moved = false
         @pos = pos 
-        color_char = color == "white" ? "\u2659": "\u265F"
-        @icon = color_char.encode('utf-8')
+        @color = color
+        color_set = color == "white" ? "\u2659": "\u265F"
+        @icon = color_set.encode('utf-8')
         @moved = moved
     end
 
     def move_valid? cord
-        row_moved = (cord[0]-pos[0]).abs
+        row_moved =  @color == "white" ? cord[0]-pos[0] : pos[0]-cord[0]
         col_moved = (cord[1]-pos[1]).abs
         
         if (@moved == false)
@@ -21,7 +22,6 @@ class Pawn
         elsif (row_moved == 1 && col_moved == 0)
             return true
         else 
-            puts "pawn move not valid"
             return false
         end
     end

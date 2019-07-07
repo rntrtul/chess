@@ -59,4 +59,9 @@ class Board
             return false
         end
     end
+
+    def path_clear cord, piece
+        
+    end
+
 end
