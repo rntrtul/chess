@@ -5,7 +5,6 @@ class Player
 
     def initialize colour
         @colour = colour
-        @pieces = []
     end
 
     def set_pieces board
@@ -14,7 +13,6 @@ class Player
 
         board[row_pawn].each_with_index do |cell,col|
             board[row_pawn][col] = Pawn.new([row_pawn,col], @colour)
-            @pieces << board[row_pawn][col]
         end
 
         board[row_king][0] = Rook.new([row_king,0], @colour)
@@ -25,9 +23,5 @@ class Player
         board[row_king][5] = Bishop.new([row_king,5], @colour)
         board[row_king][6] = Knight.new([row_king,6], @colour)
         board[row_king][7] = Rook.new([row_king,7], @colour) 
-
-        board[row_king].each_with_index do |piece, col|
-            @pieces << board[row_king][col]
-        end
     end
 end
