@@ -12,10 +12,10 @@ white_player.set_pieces(board.board)
 board.draw_board
 
 puts"enter pos of piece you wish to move"
-piece_pos = gets.chomp
+pos = gets.chomp
 
-while (piece_pos != "stop")    
-    piece_got =  board.get_piece(piece_pos)
+while (pos != "stop")    
+    piece_got =  board.get_cell(pos)
     
     if (piece_got != 0)
         puts"enter pos you want to go to"
@@ -28,7 +28,7 @@ while (piece_pos != "stop")
     end
     
     puts"enter pos of piece you wish to move"
-    piece_pos = gets.chomp
+    pos = gets.chomp
 end
 
 board.draw_board
