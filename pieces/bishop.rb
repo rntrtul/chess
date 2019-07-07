@@ -9,8 +9,8 @@ class Bishop
     end
 
     def move_valid? cord
-        row_moved = (cord[0]-pos[0]).abs
-        col_moved = (cord[1]-pos[1]).abs
+        row_moved = (cord[0] - @pos[0]).abs
+        col_moved = (cord[1] - @pos[1]).abs
 
         if (row_moved == col_moved)
             return true

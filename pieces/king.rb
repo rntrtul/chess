@@ -9,10 +9,10 @@ class King
     end
 
     def move_valid? cord
-        row_moved = cord[0]-pos[0].abs
-        col_moved = cord[1]-pos[1].abs
+        row_moved = (cord[0] - @pos[0]).abs
+        col_moved = (cord[1] - @pos[1]).abs
 
-        if (row_moved <= 1 && col_moved <=1)
+        if (row_moved <= 1 && col_moved <= 1)
             return true
         else
             return false

@@ -30,3 +30,5 @@ while (piece_pos != "stop")
     puts"enter pos of piece you wish to move"
     piece_pos = gets.chomp
 end
+
+board.draw_board
