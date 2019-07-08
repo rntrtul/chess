@@ -1,5 +1,6 @@
 require "./board.rb"
 require "./player.rb"
+require "rainbow"
 require "oj"
 
 class Game
@@ -25,29 +26,51 @@ class Game
     def game_loop
         @chess_board.draw_board
         
-        puts"enter pos of piece you wish to move"
+        puts"Select a Piece:"
         pos = gets.chomp
 
         while (pos != "stop")
             if (pos == "save")
                 save
                 exit
-            end    
-            
-            piece_got =  @chess_board.get_cell(pos)
-            
-            if (piece_got != 0)
-                puts"enter pos you want to go to"
-                move_to = gets.chomp
+            end 
 
-                @chess_board.can_move?(move_to, piece_got)
-                @chess_board.draw_board
-            else
-                puts "enter a valid square with a valid piece"
-            end
+            cord = pos_to_cord pos   
+
+            if (cord_on_board? cord)
+                piece_got =  @chess_board.get_cell(cord)
+                
+                if (piece_got != 0)
+                    puts"Move to:"
+                    move_to = pos_to_cord(gets.chomp)
+
+                    if (cord_on_board? move_to)
+                        @chess_board.can_move?(move_to, piece_got)
+                        @chess_board.draw_board
+                    end
+                else
+                    puts Rainbow("Select square with a piece on it").yellow
+                end
+            end 
             
-            puts "enter pos of piece you wish to move"
+            puts "Select a Piece:"
             pos = gets.chomp
+        end
+    end
+
+    def pos_to_cord pos
+        row = pos[1].to_i - 1
+        col = (pos[0].ord - 97) % 26
+        
+        return [row, col]
+    end
+    
+    def cord_on_board? cord 
+        if (cord[0] >= 0 && cord[0] <= 7 && cord[1] >= 0 && cord[1] <= 7)
+            return true
+        else
+            puts Rainbow("Enter a square on the board").yellow
+            return false
         end
     end
 

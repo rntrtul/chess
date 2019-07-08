@@ -1,3 +1,4 @@
+require "rainbow"
 class Board
     attr_accessor :board
 
@@ -21,20 +22,12 @@ class Board
         puts "     a   b   c   d   e   f   g   h"
     end 
 
-    def get_cell pos
-        cord = (pos[0].is_a? Integer)? pos : pos_to_cord(pos)
-
-        if (cord_on_board?(cord))
-            cell = @board[cord[0]][cord[1]]      
-            return cell 
-        end
-
-        return 29
+    def get_cell cord
+        cell = @board[cord[0]][cord[1]]      
+        return cell 
     end
 
-    def can_move? pos, piece
-        dest_cord = pos_to_cord(pos)
-
+    def can_move? dest_cord, piece
         if (piece.move_valid? dest_cord)
             clear_upto = path_clear_to(dest_cord,piece)
 
@@ -52,23 +45,9 @@ class Board
     
     private
 
-    def cord_on_board? cord 
-        if (cord[0] >= 0 && cord[0] <= 7 && cord[1] >= 0 && cord[1] <= 7)
-            return true
-        else
-            return false
-        end
-    end
-
-    def pos_to_cord pos
-        row = pos[1].to_i - 1
-        col = (pos[0].ord - 97) % 26
-        
-        return [row, col]
-    end
-    
     def move_piece dest_cord, piece
         old_cell = @board[dest_cord[0]][dest_cord[1]]
+        
         @board[piece.pos[0]] [piece.pos[1]] = 0
         @board[dest_cord[0]][dest_cord[1]] = piece
         piece.pos = dest_cord
@@ -132,7 +111,7 @@ class Board
     end
 
     def game_over
-        puts "Congratulations you have captured their King"
+        puts Rainbow("Congratulations you have captured their King").blue
         exit
     end
 end
