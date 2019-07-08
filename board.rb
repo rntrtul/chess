@@ -73,11 +73,17 @@ class Board
         piece.pos = dest_cord
     end
 
+    def pawn_attack? dest_cord, cur_cord 
+        puts (dest_cord[1]-cur_cord[1]).abs == 1
+        return (dest_cord[1]-cur_cord[1]).abs == 1
+    end
+
     def attacking? dest_cord, piece 
         cell = @board[dest_cord[0]][dest_cord[1]]
         
-        if (cell != 0)
+        if (cell != 0)           
             return true if (cell.colour != piece.colour)
+            return true if (piece.points == 1 && pawn_attack?(dest_cord,piece.pos))
         end
 
         return false
