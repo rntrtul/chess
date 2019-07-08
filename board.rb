@@ -36,9 +36,11 @@ class Board
         dest_cord = pos_to_cord(pos)
 
         if (piece.move_valid? dest_cord)
-            if (!path_clear?(dest_cord,piece))
-                move_piece(dest_cord,piece) if (attacking?(dest_cord,piece))
-            elsif(path_clear?(dest_cord,piece))
+            clear_upto = path_clear_to(dest_cord,piece)
+
+            if (clear_upto == 1)
+                move_piece(dest_cord,piece) if (attacking? dest_cord,piece)
+            elsif(clear_upto == 0)
                 move_piece(dest_cord,piece)
             end
 
@@ -81,19 +83,21 @@ class Board
         return false
     end
 
-    def path_clear? dest_cord, piece
+    def path_clear_to dest_cord, piece
         row_moved = (dest_cord[0] - piece.pos[0]).abs
         col_moved = (dest_cord[1] - piece.pos[1]).abs
-        next_cord = [0,0]
         direction = direction_move(dest_cord, piece)
 
         if (row_moved == col_moved) # bishop/queen movement
+            squares_left = row_moved
             for i in 1..row_moved do
                 next_cord = [piece.pos[0] + direction[0] * i, piece.pos[1] + direction[1] * i]
-                return false if get_cell(next_cord) != 0
+                return squares_left if get_cell(next_cord) != 0
+                squares_left -= 1
             end
         elsif (row_moved <= 8 && col_moved == 0 || row_moved == 0  && col_moved <= 8 ) #rook/queen movement
             axis = row_moved == 0 ? col_moved : row_moved
+            squares_left = axis
 
             for i in 1..axis do
                 if (axis == row_moved)
@@ -102,13 +106,14 @@ class Board
                     next_cord = [piece.pos[0], piece.pos[1] + direction[1] * i]
                 end
                 
-                return false if get_cell(next_cord) != 0
+                return squares_left if get_cell(next_cord) != 0
+                squares_left -=1
             end
         else
-            return false if get_cell(dest_cord) != 0
+            return 29 if get_cell(dest_cord) != 0
         end
 
-        return true
+        return 0
     end
 
     def direction_move dest_cord, piece
