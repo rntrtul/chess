@@ -68,9 +68,11 @@ class Board
     end
     
     def move_piece dest_cord, piece
+        old_cell = @board[dest_cord[0]][dest_cord[1]]
         @board[piece.pos[0]] [piece.pos[1]] = 0
         @board[dest_cord[0]][dest_cord[1]] = piece
         piece.pos = dest_cord
+        game_over if (old_cell != 0 && old_cell.points == 80)
     end
 
     def pawn_attack? dest_cord, cur_cord 
@@ -116,7 +118,7 @@ class Board
                 squares_left -=1
             end
         else
-            return 29 if get_cell(dest_cord) != 0
+            return 29 unless (get_cell(dest_cord) == 0 || attacking?(dest_cord,piece))
         end
 
         return 0
@@ -127,5 +129,10 @@ class Board
         col_direction = dest_cord[1] - piece.pos[1] >= 0 ? 1 : -1
         
         return [row_direction, col_direction]
+    end
+
+    def game_over
+        puts "Congratulations you have captured their King"
+        exit
     end
 end

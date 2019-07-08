@@ -33,6 +33,7 @@ class Game
                 save
                 exit
             end    
+            
             piece_got =  @chess_board.get_cell(pos)
             
             if (piece_got != 0)

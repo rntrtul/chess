@@ -4,7 +4,7 @@ class King
 
     def initialize pos, colour
         @pos = pos 
-        @points = 3
+        @points = 80
         @colour = colour
         colour_char = colour == "white" ? "\u2654": "\u265A"
         @icon = colour_char.encode('utf-8')
